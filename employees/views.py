@@ -21,9 +21,9 @@ class CreateRetrieveUpdateDeleteEmployeeView(generics.CreateAPIView,
 
 
     def put(self, request, *args, **kwargs):
-        #instance = self.get_object()
         serializer = EmployeeSerializer(self.get_object(), data=request.data)
         if serializer.is_valid(raise_exception=True):
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
 
     def delete(self, request, *args, **kwargs):
